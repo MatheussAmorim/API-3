@@ -1,4 +1,6 @@
 ---
+server:
+    port: 8180
 server.servlet.context-path: '/${info.app.name}'
 grails:
     profile: rest-api
