@@ -6,7 +6,7 @@ import java.time.LocalDate
 
 class CidadeController {
 
-    LogService logService
+    CidadeService cidadeService
 
     static responseFormats = ["json"]
     static allowedMethods = [
@@ -17,6 +17,16 @@ class CidadeController {
 
     def save(){
         Map retorno = cidadeService.save()
+        respond(retorno)
+    }
+
+    def update() {
+        Map retorno = cidadeService.update()
+        respond(retorno)
+    }
+
+    def delete(Long id) {
+        Map retorno = cidadeService.delete(id)
         respond(retorno)
     }
 }
