@@ -7,9 +7,21 @@ class FuncionarioController {
     static responseFormats = ["json"]
     static allowedMethods = [
             save: "POST",
+            list: "GET",
             update: "PUT",
-            delete: "DELETE"
+            delete: "DELETE",
+            get: "GET"
     ]
+
+    def list(){
+        Map retorno = funcionarioService.list()
+        respond(retorno)
+    }
+
+    def get(long id){
+        Map retorno = funcionarioService.get(id)
+        respond(retorno)
+    }
 
     def save(){
         Map retorno = funcionarioService.save()

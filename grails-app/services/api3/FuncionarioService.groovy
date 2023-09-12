@@ -1,46 +1,39 @@
 package api3
 
+import grails.plugins.rest.client.RestBuilder
+import grails.plugins.rest.client.RestResponse
+import org.grails.web.json.JSONObject
+
 import java.time.LocalDate
 
 class FuncionarioService {
 
-    def resp
     LogService logService
+    RestBuilder rest = new RestBuilder()
+
+    Map list() {
+        RestResponse resp = rest.get("http://localhost:8080/API2/funcionario/list")
+        JSONObject respJson = resp.json as JSONObject
+        return respJson
+    }
+
+    Map get(Long id) {
+        RestResponse resp = rest.get("http://localhost:8080/API2/funcionario/get/${id}")
+        JSONObject respJson = resp.json as JSONObject
+        return respJson
+    }
+
+    Map delete(Long id){
+        RestResponse resp = rest.delete("http://localhost:8080/API2/funcionario/delete/${id}")
+        JSONObject respJson = resp.json as JSONObject
+        return respJson
+    }
 
     Map save(){
-
-        def requestData = request.JSON
-        logService.salvarLog(data: LocalDate.now(), descricao: "Requisição SAVE para API2: ${requestData}")
-
-        Map retorno = [success: true]
-
-        resp = rest.post("http://localhost:8080/API2/funcionario/save"){
-            contentType "application/json"
-        }
         return retorno
     }
 
     Map update(){
-        def requestData = request.JSON
-        logService.salvarLog(data: LocalDate.now(), descricao: "Requisição UPDATE para API2: ${requestData}")
-
-        Map retorno = [success: true]
-
-        resp = rest.update("http://localhost:8080/API2/funcionario/update"){
-            contentType "application/json"
-        }
-        return retorno
-    }
-
-    Map delete(){
-        def requestData = request.JSON
-        logService.salvarLog(data: LocalDate.now(), descricao: "Requisição DELETE para API2: ${requestData}")
-
-        Map retorno = [success: true]
-
-        resp = rest.delete("http://localhost:8080/API2/funcionario/delete"){
-            contentType "application/json"
-        }
         return retorno
     }
 }

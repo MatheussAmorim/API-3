@@ -7,9 +7,21 @@ class ReajusteSalarioController {
     static responseFormats = ["json"]
     static allowedMethods = [
             save: "POST",
+            list: "GET",
             update: "PUT",
-            delete: "DELETE"
+            delete: "DELETE",
+            get: "GET"
     ]
+
+    def list(){
+        Map retorno = reajusteSalarioService.list()
+        respond(retorno)
+    }
+
+    def get(long id){
+        Map retorno = reajusteSalarioService.get(id)
+        respond(retorno)
+    }
 
     def save(){
         Map retorno = reajusteSalarioService.save()
