@@ -1,12 +1,13 @@
 package api3
 
+import grails.converters.JSON
 import grails.plugins.rest.client.RestBuilder
 import grails.plugins.rest.client.RestResponse
+import grails.web.api.ServletAttributes
 import org.grails.web.json.JSONObject
 
-import java.time.LocalDate
 
-class ReajusteSalarioService {
+class ReajusteSalarioService implements ServletAttributes {
 
     LogService logService
     RestBuilder rest = new RestBuilder()
@@ -30,10 +31,22 @@ class ReajusteSalarioService {
     }
 
     Map save(){
-        return retorno
+        JSON jsonBody = request.JSON
+
+        RestResponse resp = rest.post("http://localhost:8080/API2/reajusteSalario/save"){
+            body jsonBody
+        }
+        JSONObject respJson = resp.json as JSONObject
+        return respJson
     }
 
-    Map update(){
-        return retorno
+    Map update(Long id){
+        JSON jsonBody = request.JSON
+
+        RestResponse resp = rest.put("http://localhost:8080/API2/reajusteSalario/update/${id}"){
+            body jsonBody
+        }
+        JSONObject respJson = resp.json as JSONObject
+        return respJson
     }
 }

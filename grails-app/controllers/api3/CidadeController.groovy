@@ -35,8 +35,8 @@ class CidadeController {
         respond(retorno)
     }
 
-    def update() {
-        Map retorno = cidadeService.update()
+    def update(Long id) {
+        Map retorno = cidadeService.update(id)
         respond(retorno)
     }
 
