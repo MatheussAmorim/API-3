@@ -28,8 +28,8 @@ class FuncionarioController {
         respond(retorno)
     }
 
-    def update() {
-        Map retorno = funcionarioService.update()
+    def update(Long id) {
+        Map retorno = funcionarioService.update(id)
         respond(retorno)
     }
 

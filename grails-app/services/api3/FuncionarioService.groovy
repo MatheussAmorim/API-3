@@ -40,10 +40,10 @@ class FuncionarioService implements ServletAttributes {
         return respJson
     }
 
-    Map update(){
+    Map update(Long id){
         JSON jsonBody = request.JSON
 
-        RestResponse resp = rest.put("http://localhost:8080/API2/funcionario/update"){
+        RestResponse resp = rest.put("http://localhost:8080/API2/funcionario/update/${id}"){
             body jsonBody
         }
         JSONObject respJson = resp.json as JSONObject

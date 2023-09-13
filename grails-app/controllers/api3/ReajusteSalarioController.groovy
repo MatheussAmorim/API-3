@@ -28,8 +28,8 @@ class ReajusteSalarioController {
         respond(retorno)
     }
 
-    def update() {
-        Map retorno = reajusteSalarioService.update()
+    def update(Long id) {
+        Map retorno = reajusteSalarioService.update(id)
         respond(retorno)
     }
 
