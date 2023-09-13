@@ -6,6 +6,8 @@ import grails.plugins.rest.client.RestResponse
 import grails.web.api.ServletAttributes
 import org.grails.web.json.JSONObject
 
+import java.time.LocalDate
+
 
 class FuncionarioService implements ServletAttributes {
 
@@ -27,6 +29,9 @@ class FuncionarioService implements ServletAttributes {
     Map delete(Long id){
         RestResponse resp = rest.delete("http://localhost:8080/API2/funcionario/delete/${id}")
         JSONObject respJson = resp.json as JSONObject
+
+        def respJsonString = resp.json.toString()
+        logService.salvarLog(LocalDate.now(), "DELETE -> " + respJsonString + "FuncionarioID ${id}")
         return respJson
     }
 
@@ -37,6 +42,9 @@ class FuncionarioService implements ServletAttributes {
             body jsonBody
         }
         JSONObject respJson = resp.json as JSONObject
+
+        def respJsonString = resp.json.toString()
+        logService.salvarLog(LocalDate.now(), "SAVE -> " + respJsonString + jsonBody)
         return respJson
     }
 
@@ -47,6 +55,9 @@ class FuncionarioService implements ServletAttributes {
             body jsonBody
         }
         JSONObject respJson = resp.json as JSONObject
+
+        def respJsonString = resp.json.toString()
+        logService.salvarLog(LocalDate.now(), "SAVE -> " + respJsonString + jsonBody)
         return respJson
     }
 }
